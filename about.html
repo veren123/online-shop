@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Responsive Navbar with Header and Product Cards</title>
+    <!-- Link to Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- Link to Google Fonts -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<style>
+    body {
+        margin: 0;
+        font-family: 'Roboto', sans-serif;
+        background-color: #f4f4f4;
+    }
+
+    .header {
+        width: 100%;
+        background-color: #444;
+        color: white;
+        text-align: center;
+        padding: 10px 20px;
+        position: fixed;
+        top: 0;
+        z-index: 1000;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .header h1 {
+        margin: 0;
+        font-size: 2em;
+        font-weight: 700;
+    }
+
+    .cart {
+        font-size: 1.5em;
+        display: flex;
+        align-items: center;
+        position: relative;
+    }
+
+    .cart i {
+        margin-right: 10px;
+    }
+
+    .cart span {
+        font-size: 1.2em;
+        font-weight: bold;
+        background-color: red;
+        color: white;
+        border-radius: 50%;
+        padding: 2px 8px;
+        position: absolute;
+        top: -10px;
+        right: -10px;
+    }
+
+    .navbar {
+        width: 100%;
+        background-color: #333;
+        overflow: hidden;
+        position: fixed;
+        bottom: 0;
+        z-index: 1000;
+    }
+
+    .navbar ul {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: space-around;
+    }
+
+    .navbar ul li {
+        display: inline;
+    }
+
+    .navbar ul li a {
+        display: block;
+        color: white;
+        text-align: center;
+        padding: 14px 20px;
+        text-decoration: none;
+    }
+
+    .navbar ul li a:hover {
+        background-color: #575757;
+    }
+
+    .content {
+        padding: 20px;
+        margin-top: 80px;
+        /* Adjust this value to avoid overlapping with header */
+        margin-bottom: 60px;
+        /* Adjust this value to avoid overlapping with navbar */
+        max-width: 1200px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .about-me {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        background-color: white;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        margin-bottom: 20px;
+    }
+
+    .about-me .profile-pic {
+        border-radius: 50%;
+        width: 150px;
+        height: 150px;
+        object-fit: cover;
+    }
+
+    .about-me-content {
+        text-align: center;
+        margin-top: 20px;
+    }
+
+    .about-me-content h3 {
+        font-size: 2em;
+        margin: 10px 0;
+        position: relative;
+    }
+
+    .about-me-content p {
+        font-size: 1em;
+        color: #555;
+        margin: 10px 0;
+    }
+
+    .about-me .skills {
+        text-align: center;
+        margin-top: 20px;
+    }
+
+    .about-me .skills h4 {
+        font-size: 1.5em;
+        margin-bottom: 10px;
+    }
+
+    .about-me .skills ul {
+        list-style-type: none;
+        padding: 0;
+    }
+
+    .about-me .skills ul li {
+        font-size: 1em;
+        color: #555;
+        margin: 5px 0;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .product-grid {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 20px;
+        justify-content: center;
+    }
+
+    .product-card {
+        background-color: white;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        max-width: 300px;
+        text-align: center;
+        padding: 20px;
+    }
+
+    .product-card img {
+        max-width: 100%;
+        height: auto;
+        border-radius: 5px 5px 0 0;
+    }
+
+    .product-card h3 {
+        font-size: 1.5em;
+        margin: 10px 0;
+    }
+
+    .product-card .stars {
+        color: #f5b301;
+    }
+
+    .product-card .price {
+        color: #b12704;
+        font-size: 1.2em;
+        margin: 10px 0;
+    }
+
+    .product-card p {
+        font-size: 1em;
+        color: #555;
+    }
+
+    .product-card button {
+        background-color: #4CAF50;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 1em;
+    }
+
+    .product-card button:hover {
+        background-color: #45a049;
+    }
+
+    @keyframes typing {
+        from {
+            width: 0;
+        }
+
+        to {
+            width: 100%;
+        }
+    }
+
+    @keyframes blink-caret {
+
+        from,
+        to {
+            border-color: transparent;
+        }
+
+        50% {
+            border-color: black;
+        }
+    }
+
+    .typing {
+        overflow: hidden;
+        border-right: .15em solid black;
+        white-space: nowrap;
+        margin: 0 auto;
+        letter-spacing: .15em;
+        animation: blink-caret .75s step-end infinite;
+    }
+</style>
+
+<body>
+    <header class="header">
+        <b>online shop by veren</b>
+    </header>
+    <div class="content">
+        <h2>About Me</h2>
+        <section class="about-me">
+            <img src="https://via.placeholder.com/150" alt="Profile Picture" class="profile-pic">
+            <div class="about-me-content">
+                <h3><span id="name"></span></h3>
+                <p>Halo! Saya veren, seorang pengembang web yang bersemangat dan senang menciptakan web yang dinamis dan
+                    responsif
+                    aplikasi. saya masih kelas 9 Smp angkasa adisutjipto, saya telah mengasah keterampilan saya dalam
+                    HTML, CSS,
+                    JavaScript, dan berbagai kerangka kerja modern.</p>
+                <p>Ich bin ein. Desarrollador de software experimentado con experiencia. khusus nggunakake HTML, CSS,
+                    JavaScript,Dina karya abdi, abdi geus hasil ngembangkeun rupa-rupa proyék interaktif aplikasi
+                    berbasis web dengan fitur interaktif yang kompleks.</p>
+                <div class="skills">
+                    <h4>Skills</h4>
+                    <ul>
+                        <li><i class="fab fa-html5"></i> HTML & CSS</li>
+                        <li><i class="fab fa-js-square"></i> JavaScript</li>
+                        <li><i class="fab fa-css3-alt"></i> CSS</li>
+                        <li><i class="fas fa-flag"></i> German</li>
+                        <li><i class="fas fa-flag"></i> Spanish</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+        <!-- Other content like products -->
+    </div>
+    <nav class="navbar">
+        <ul>
+            <li><a href="index.html"><i class="fas fa-home"></i> Home</a></li>
+            <li><a href="#about"><i class="fas fa-info-circle"></i> About</a></li>
+            <li><a href="#services"><i class="fas fa-concierge-bell"></i> Services</a></li>
+            <li><a href="#contact"><i class="fas fa-envelope"></i> Contact</a></li>
+        </ul>
+    </nav>
+
+    <script>
+        let cartCount = 0;
+
+        function addToCart() {
+            cartCount++;
+            document.getElementById('cart-count').innerText = cartCount;
+        }
+
+        // Typing effect for the name with loop
+        const nameElement = document.getElementById('name');
+        const nameText = "Veren 9A";
+
+        function typeWriter(text, element, delay = 100, pause = 2000) {
+            let i = 0;
+            function type() {
+                if (i < text.length) {
+                    element.innerHTML += text.charAt(i);
+                    i++;
+                    setTimeout(type, delay);
+                } else {
+                    setTimeout(() => {
+                        element.innerHTML = '';
+                        i = 0;
+                        type();
+                    }, pause);
+                }
+            }
+            type();
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            typeWriter(nameText, nameElement);
+        });
+
+    </script>
+</body>
+
+</html>
